@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+  <appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+
+    <File name="input_errors" fileName="logs/input_errors.log" immediateFlush="true">
+      <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <RegexFilter regex = "Not found station:.*" onMatch = "ACCEPT" onMismatch = "DENY"/>
+    </File>
+    <File name="search" fileName="logs/search.log" >
+      <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <RegexFilter regex = "Looking for a station:.*" onMatch = "ACCEPT" onMismatch = "DENY"/>
+
+    </File>
+    <File name="exception" fileName="logs/exception.log" immediateFlush="true">
+      <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <RegexFilter regex = "Error:.*" onMatch = "ACCEPT" onMismatch = "DENY"/>
+    </File>
+  </appenders>
+
+  <loggers>
+    <root level="debug">
+      <appender-ref ref="input_errors" level="warn"/>
+      <appender-ref ref="search" level="info"/>
+      <appender-ref ref="exception" level="error"/>
+    </root>
+  </loggers>
+</configuration>
